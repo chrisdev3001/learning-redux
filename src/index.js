@@ -1,17 +1,54 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { createStore } from 'redux'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// Un reducer es una función pura, que recibe un stado y retorna un nuevo estado!
+const noteReducer = (state = [], action) => {
+  if(action.type === '@notes/created'){
+    return state.concat(action.payload)
+  }
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  return state
+}
+
+const store = createStore(noteReducer)
+
+store.dispatch({
+  type: '@notes/created',
+  payload: {
+    content: 'Me gusta aprender React!',
+    important: true,
+    id: 1,
+  }
+})
+
+store.dispatch({
+  type: '@notes/created',
+  payload: {
+    content: 'Tengo hambre!!!',
+    important: false,
+    id: 2,
+  }
+})
+
+const App = () => {
+  const state = store.getState()
+  return (
+    <ul>
+      {state.map(note => (
+        <li key={note.id}>{note.content} - {note.important ? <strong>Important</strong> : <span>Not important</span>}</li>
+      ))}
+    </ul>
+  )
+}
+
+const renderApp = () => {
+  ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+  )
+}
+
+renderApp()
+store.subscribe(renderApp)
+

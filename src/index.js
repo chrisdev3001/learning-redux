@@ -1,15 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
+import { noteReducer } from './reducers/noteReducer'
 
-// Un reducer es una función pura, que recibe un stado y retorna un nuevo estado!
-const noteReducer = (state = [], action) => {
-  if(action.type === '@notes/created'){
-    return state.concat(action.payload)
-  }
-
-  return state
-}
 
 const store = createStore(noteReducer)
 

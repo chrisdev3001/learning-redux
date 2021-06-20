@@ -3,9 +3,25 @@ import Notes from './components/Notes'
 
 const App = () => {
 
+  function filterSelected(filter){
+    
+  }
+
   return (
     <div>
       <NewNote/>
+
+      <div>
+        all
+        <input type='radio' name='filter' onChange={() => filterSelected('ALL')} />
+
+        important
+        <input type='radio' name='filter' onChange={() => filterSelected('IMPORTANT')} />
+
+        not important
+        <input type='radio' name='filter' onChange={() => filterSelected('NOT_IMPORTANT')} />
+      </div>
+
       <Notes/>
     </div>
     

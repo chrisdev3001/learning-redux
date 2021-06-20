@@ -10,7 +10,7 @@ function Note({note, toggleImportantNote}){
 }
 
 export default function NotesContainer(){
-    const notes = useSelector(state => state)   // Selecciona una parte del estado a la que me quiero suscribir
+    const notes = useSelector(state => state.notes)   // Selecciona una parte del estado a la que me quiero suscribir
     const dispatch = useDispatch()              // Dispatcher
 
     function toggleImportantNote(id) {

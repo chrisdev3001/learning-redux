@@ -1,6 +1,11 @@
 // Un reducer es una función pura, que recibe un stado y retorna un nuevo estado!
 export const noteReducer = (state = [], action) => {
   console.log('ACTION', action)
+
+    if(action.type === '@notes/init'){
+      return action.payload
+    }
+
     if(action.type === '@notes/created'){
         return [
             ...state,
@@ -51,6 +56,13 @@ export function toggleImportanceOf(id){
     payload: {
       id
     }
+  }
+}
+
+export function initNotes(notes){
+  return {
+    type: '@notes/init',
+    payload: notes
   }
 }
   

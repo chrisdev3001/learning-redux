@@ -1,19 +1,5 @@
-const initialState = [
-  {
-    content: 'Hola Chrisdev3001',
-    important: true,
-    id: 1
-  },
-  {
-    content: 'Bien ahi aprendiendo ',
-    important: false,
-    id: 2
-  },
-]
-
-
 // Un reducer es una función pura, que recibe un stado y retorna un nuevo estado!
-export const noteReducer = (state = initialState, action) => {
+export const noteReducer = (state = [], action) => {
   console.log('ACTION', action)
     if(action.type === '@notes/created'){
         return [

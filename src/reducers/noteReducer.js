@@ -1,4 +1,4 @@
-import { getAll } from '../services/notes'
+import { getAll, createNewNote } from '../services/notes'
 
 // Un reducer es una función pura, que recibe un stado y retorna un nuevo estado!
 export const noteReducer = (state = [], action) => {
@@ -37,12 +37,20 @@ export const noteReducer = (state = [], action) => {
     return state
 }
 
+/* Logica de action creators debe ser la mínima posible (no meter, logica negocio, conexiones db, apis, etc. Eso debe ir minimo en un servicio) */
 // Esto es un actionCreator (redux patrón)
-export function createNote(note){
-  return {
+export function createNote(content){
+  return async(dispatch) => {
+    const newNote = await createNewNote(content)
+    dispatch({
+      type: '@notes/created',
+      payload: newNote
+    })
+  }
+/*   return {
     type: '@notes/created',
     payload: note
-  }
+  } */
 }
 
 export function toggleImportanceOf(id){

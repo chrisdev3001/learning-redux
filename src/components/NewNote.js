@@ -11,9 +11,7 @@ export default function NewNote() {
         const { target } = e
         const content = target.note.value
         target.note.value = ''
-
-        const newNote = await createNewNote(content)
-        dispatch(createNote(newNote))
+        dispatch(createNote(content))
     }
 
 

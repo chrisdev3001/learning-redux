@@ -1,3 +1,5 @@
+import { getAll } from '../services/notes'
+
 // Un reducer es una función pura, que recibe un stado y retorna un nuevo estado!
 export const noteReducer = (state = [], action) => {
   console.log('ACTION', action)
@@ -52,10 +54,15 @@ export function toggleImportanceOf(id){
   }
 }
 
-export function initNotes(notes){
-  return {
-    type: '@notes/init',
-    payload: notes
+export function initNotes(){
+  return async(dispatch) => {
+    const notes = await getAll()
+    dispatch({
+      type: '@notes/init',
+      payload: notes
+    })
   }
+
+
 }
   

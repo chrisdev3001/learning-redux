@@ -35,18 +35,11 @@ export const noteReducer = (state = [], action) => {
     return state
 }
 
-
-export const generateId = () => Math.floor(Math.random() * 999999999) +1
-
 // Esto es un actionCreator (redux patrón)
-export function createNote(content){
+export function createNote(note){
   return {
     type: '@notes/created',
-    payload:{
-      content,
-      important: false,
-      id: generateId()
-    }
+    payload: note
   }
 }
 
